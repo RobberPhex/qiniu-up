@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='qiniu-sync',
-      version='1.0',
+      version='0.1.0',
       description='Sync local file to Qiniu',
       author='Robert Lu',
       author_email='robberphex@gmail.com',
