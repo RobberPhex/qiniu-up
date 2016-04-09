@@ -2,16 +2,19 @@
 
 from setuptools import setup, find_packages
 
-
-setup(name='qiniu-sync',
+setup(name='qiniu-up',
       version='0.1.0',
       description='Sync local file to Qiniu',
       author='Robert Lu',
       author_email='robberphex@gmail.com',
       packages=find_packages(exclude=['contrib', 'docs', 'tests']),
+      install_requires=[
+          "requests",
+          "qiniu > 7.0.6"
+      ],
       entry_points={
           'console_scripts': [
-              'qiniu-sync = qiniu_sync:main'
+              'qiniu-up = qiniu_up:main'
           ]
       },
       )

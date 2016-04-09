@@ -1,2 +1,1 @@
 git+https://github.com/RobberPhex/python-sdk.git@v7.0.7#egg=qiniu
-requests==2.9.1
