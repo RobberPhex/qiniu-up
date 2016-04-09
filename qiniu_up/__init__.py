@@ -6,6 +6,10 @@ from os.path import getsize, join, relpath
 
 from qiniu import Auth, BucketManager, etag, put_file
 
+logging.getLogger(__name__).setLevel(logging.INFO)
+logging.basicConfig()
+log = logging.getLogger(__name__)
+
 
 def list_file(base_path):
     for root, dirs, files in os.walk(base_path):
@@ -21,20 +25,18 @@ def upload(q, bucket_name, local_path, remote_path):
         stat, _ = bucket.stat(bucket_name, key)
         if not stat:
             token = q.upload_token(bucket_name, key, 3600)
-            logging.info('uploading new file %s' % rel_path)
+            log.info('uploading new file %s' % rel_path)
             put_file(token, key, join(local_path, rel_path))
         elif stat['fsize'] != getsize(join(local_path, rel_path)) \
                 or stat['hash'] != etag(join(local_path, rel_path)):
             token = q.upload_token(bucket_name, key, 3600)
-            logging.info('uploading diff file %s' % rel_path)
+            log.info('uploading diff file %s' % rel_path)
             put_file(token, key, join(local_path, rel_path))
         else:
-            logging.debug('file %s is identical' % rel_path)
+            log.debug('file %s is identical' % rel_path)
 
 
 def main():
-    logging.basicConfig(level=logging.INFO)
-
     parser = argparse.ArgumentParser(description='upload local file to qiniu.')
     parser.add_argument('--config', '-c', dest='config_file', help='config file')
     parser.add_argument('--local-path', '-l', dest='local_path', required=True, help='which local path to upload')
