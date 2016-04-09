@@ -3,7 +3,7 @@
 from setuptools import setup, find_packages
 
 setup(name='qiniu-up',
-      version='0.1.0',
+      version='0.2.0',
       description='Sync local file to Qiniu',
       author='Robert Lu',
       author_email='robberphex@gmail.com',
